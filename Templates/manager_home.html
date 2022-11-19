@@ -1,0 +1,101 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="description" content="Colorlib Templates">
+    <meta name="author" content="Colorlib">
+    <meta name="keywords" content="Colorlib Templates">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+   <!-- Title Page-->
+    <title>Manager Home</title>
+        <!-- Main CSS-->
+    <link href="{% static 'colorlib-regform-4/css/main.css'%}" rel="stylesheet" media="all">
+
+</head>
+<style>
+    body{
+        background-image: url("/static/images/ava_desti.jpg");
+        background-size: cover;
+        background-repeat: no-repeat;
+        background-attachment: fixed;
+    }
+    .image{
+        height: 100px;
+        width: 200px;
+        object-fit: cover;
+        object-position: center center;
+    }
+</style>
+
+<body>
+    
+    <nav class="navbar navbar-expand-sm bg-dark navbar-dark fixed-top text-danger">
+        <a class="navbar-brand" >MANAGER</a>
+    </nav>
+        {% csrf_token %}
+        <section class="section">
+            <div class="container">
+                <div class="row justify-content-center">
+                    <div class="col-md-20"><br><br>
+                        <div class="card"><br>
+                            <div class="card-header">
+                                <h1 class="fw-bold">Available Destinations</h1>
+                            </div>
+                            <div class="card-body">
+                                <table class="table table-bordered table-striped">
+                                    <thead>
+                                        <tr>
+                                            <th>Id</th>
+                                            <th>Country</th>
+                                            <th>Number of Packages</th>
+                                            <th>image 1</th>
+                                            <th>image 2</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        {% for d in dests %}
+                                            <tr>
+                                                <td>{{ d.id }} </td>
+                                                <td>{{ d.country }} </td>
+                                                <td>{{ d.number }} </td>
+                                                {% if d.img1 %}
+                                                    <td>
+                                                        <img  class="image" src="{{ d.img1.url }}" alt="image not found" >
+                                                    </td>                                                                                                   
+                                                {% endif %}
+                                                {% if d.img2 %}
+                                                    <td>
+                                                        <img  class="image" src="{{ d.img2.url }}" alt="image not found" >
+                                                    </td>                                                                                                   
+                                                {% endif %}
+                                                
+                                                <td>
+                                                    <!---------------name of the destination & delete url---------->
+                                                    <a href="{% url 'edit_desti' d.id %}"class="btn btn-success  btn-sm">EDIT</a>
+                                                    <a href="{% url 'delete_prod' d.id %}" class="btn btn-danger btn-sm">DELETE</a>
+                                                </td>
+                                            </tr>
+                                        {% endfor %}
+                                    </tbody>
+                                </table>
+                            </div>
+                            <button class="btn btn--radius-2 btn--red" type="button" onclick="window.location.href='manager_pack'">View Package</button><br/><br>
+                            <button class="btn btn--radius-2 btn--green" type="button" onclick="window.location.href='add_destination'">Add Destination</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    <!--bootstrap-->
+<script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+
+</body>
+<!-- This templates was made by Colorlib (https://colorlib.com) -->
+
+</html>
+<!-- end document-->
